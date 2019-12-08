@@ -16,7 +16,7 @@ wordMap = defaultdict(list)
 endSet = set()
 
 #Initializing data from Reddit
-for submission in reddit.subreddit('news').hot(limit=100):
+for submission in reddit.subreddit('news').hot(limit=1000):
     line = submission.title
     words = line.split()
     startSet.add(words[0])
@@ -34,7 +34,6 @@ def generateSentence(startSet, wordMap, endSet, sentence, currentWord):
         randomNextWord = random.sample(nextWordList, 1)[0]
         sentence = sentence + " " + randomNextWord
         if(randomNextWord in endSet):
-            print(sentence)
             return sentence
         return generateSentence(startSet, wordMap, endSet, sentence, randomNextWord)
 
